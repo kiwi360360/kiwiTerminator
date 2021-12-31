@@ -1,0 +1,225 @@
+@keyframes alertHidden{
+    0% {
+        opacity: 1;
+        display: auto;
+    }
+    100% {
+        opacity: 0;
+        display: auto;
+    }
+}
+* {
+    outline: none;
+    font-size: 1.5vw;
+    --green: #1eff87;
+    --red: #ff1e1e;
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+}
+*::-webkit-scrollbar {
+    display: none;
+}
+[hide] {
+    opacity: 0;
+    pointer-events: none;
+}
+html, body {
+    height: 100vh;
+    width: 100vw;
+    background-color: #1e1e1e;
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    color: white;
+    overflow-x: hidden;
+}
+#box {
+    margin: 3vw;
+    box-sizing: border-box;
+    border-width: 0.2vw;
+    border-style: solid;
+    border-color: var(--green);
+    border-radius: 1vw;
+    padding: 1vw;
+    font-size: 1vw;
+}
+input, button {
+    color: black;
+    border-style: solid;
+    border-radius: 1vw;
+    border-width: 0.1vw;
+    font-weight: bold;
+    padding: 0.5vw;
+    background-color: white;
+}
+input:hover, button:hover {
+    box-shadow: 0px 0px 1vw 0px white;
+    transition: 0.5s;
+}
+input:focus {
+    background-color: #cecece;
+}
+#isend-qname:hover {
+    background-color: #b6ff7a;
+}
+#isend-writescore:hover {
+    background-color: #ffff74;
+}
+#isend-writeans:hover {
+    background-color: #ffde71;
+}
+#isend-all:hover {
+    background-color: #ffc77a;
+}
+#isend-qname:active {
+    background-color: #b6ff7a88;
+}
+#isend-writescore:active {
+    background-color: #ffff7488;
+}
+#isend-writeans:active {
+    background-color: #ffde7188;
+}
+#isend-all:active {
+    background-color: #ffc77a88;
+}
+#isettingsCmd-input:hover {
+    background-color: #95ffe5;
+}
+#isettingsCmd-output:hover {
+    background-color: #8bbdff;
+}
+#isettingsCmd-clear:hover {
+    background-color: #b88dfd;
+}
+#isettingsCmd-input:active {
+    background-color: #95ffe588;
+}
+#isettingsCmd-output:active {
+    background-color: #8bbdff88;
+}
+#isettingsCmd-clear:active {
+    background-color: #b88dfd88;
+}
+#alertDiv {
+    position: fixed;
+    top: 0px;
+    right: 0px; 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; 
+    z-index: 1000;
+}
+.alertBox {
+    padding: 1vw;
+    margin: 1vw;
+    opacity: 0;
+    color: white;
+    background-color: #80808088;
+    border-width: 0.1vw;
+    border-style: solid;
+    border-color: #00000088;
+    border-radius: 1vw;
+    animation-name: alertHidden;
+    animation-duration: 5s;
+    animation-delay: 0s;
+    animation-iteration-count: 1;
+    animation-timing-function: cubic-bezier(0.62, 0.01, 0.62, 0.7);
+}
+[alert-type="done"] {
+    background-color: #97ff7d88;
+}
+[alert-type="error"] {
+    background-color: #ff7d7d88;
+}
+[alert-type="done"]:before{
+    color: #97ff7d;
+    content: '✔️';
+    font-weight: bold;
+}
+[alert-type="error"]:before{
+    color: #ff7d7d;
+    content: '❌';
+    font-weight: bold;
+}
+#toolsDiv {
+    position: fixed;
+    bottom: 6vw;
+    left: 0px;
+    width: 100%;
+    height: 0px;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+#toolsDiv > div {
+    display: grid;
+    grid-auto-rows: 4vw;
+    grid-template-columns: 4vw;
+    grid-gap: 2vw;
+}
+#toolsDiv > div > button {
+    color: black;
+    text-align: center;
+    font-size: 2.5vw;
+    width: 4vw;
+    height: 4vw;
+    grid-row-start: 0;
+    grid-row-end: 1;
+    z-index: 950;
+}
+#toolsDiv > div > button[tool-selected] {
+    --shadowD: 0.2vw;
+    color: var(--green);
+    border-color: var(--green);
+    text-shadow: 
+        var(--shadowD) var(--shadowD) 0px black, 
+        calc(0px - var(--shadowD)) var(--shadowD) 0px black, 
+        calc(0px - var(--shadowD)) calc(0px - var(--shadowD)) 0px black, 
+        var(--shadowD) calc(0px - var(--shadowD)) 0px black
+    ;
+}
+#toolsMask {
+    pointer-events: none;
+    opacity: 0;
+    position: fixed;
+    width: 300vw;
+    height: 300vh;
+    top: -100vh;
+    left: -100vw;
+    background-color: #00000088;
+    transition: 1s;
+    z-index: 900;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+button[tool-selected]:not(#TB-close) ~ #toolsMask {
+    pointer-events: auto;
+    opacity: 1;
+}
+#toolsBox {
+    color: black;
+    padding: 1vw;
+    width: 90vw;
+    height: 90vh;
+    background-color: #eeeeee;
+    border-radius: 1vw;
+    overflow-x: auto;
+}
+#toolsBox > div {
+    display: none;
+}
+#TB-history[tool-selected] ~ #toolsMask #TI-history {
+    display: block;
+}
+#TB-score[tool-selected] ~ #toolsMask #TI-score {
+    display: block;
+}
+.boxTitle {
+    color: var(--green);
+    margin: 3vw 3vw 0vw 3vw;
+    font-size: 3vw;
+}

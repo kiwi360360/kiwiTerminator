@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="PRAGMA" content="NO-CACHE">
+    <meta http-equiv="EXPIRES" content="0">
+    <meta http-equiv="CACHE-CONTROL" content="NO-CACHE">
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kiwiTerminator</title>
+    <meta name="author" content="MaoHuPi">
+    <meta name="description" content="網奇作答紀錄發送工具(適用2021_beta)">
+    <meta name="keywords" content="kiwi,plugin,tool">
+    <meta name="version" content="2.0.1">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 class="boxTitle">kiwiTerminator</h1>
+    <div id="alertDiv"></div>
+    <div id="toolsDiv">
+        <div>
+            <button id="TB-history" title="操作紀錄">H</button>
+            <button id="TB-score" title="分數紀錄">S</button>
+            <button id="TB-close" title="發送設定" tool-selected>X</button>
+            <div id="toolsMask">
+                <div id="toolsBox">
+                    <div id="TI-history">
+                        <h1>操作紀錄</h1>
+                        <hr>
+                        <article>
+                            <div pid="pHB" style="overflow: auto; display: grid; grid-gap: 0.5vw; grid-template-columns: auto auto auto auto auto auto;">
+                                <span>編號</span>	
+                                <span>名稱</span>
+                                <span>用戶</span>
+                                <span>類型</span>
+                                <span>時間</span>
+                                <span>結果</span>
+                            </div>
+                        </article>
+                    </div>
+                    <div id="TI-score">
+                        <h1>分數紀錄</h1>
+                        <hr>
+                        <article>
+                            用戶帳號：<span pid="pU"></span><br>
+                            本月積分：數寶 <span pid="m數寶"></span>, 銜接 <span pid="m銜接"></span><br>
+                            學期積分：數寶 <span pid="y數寶"></span>, 銜接 <span pid="y銜接"></span>
+                            <hr>
+                            作答紀錄：<div pid="pGB" style="overflow: auto; display: grid; grid-gap: 0.5vw; grid-template-columns: auto auto auto auto auto auto;">
+                                <span>編號</span>	
+                                <span>名稱</span>
+                                <span>題數</span>
+                                <span>答對</span>
+                                <span>開始</span>
+                                <span>結束</span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="box">
+        <label for="iurl">網站網址：</label>
+        <input type="text" name="iurl" id="iurl">
+        <label for="iurl" id="iurl-check"></label>
+
+        <hr>
+
+        <label for="iuser">用戶帳號：</label>
+        <input type="text" name="iuser" id="iuser">
+        <label for="iuser" id="iuser-check"></label>
+
+        <hr>
+
+        <label >就讀年級：</label>
+        <label for="iyear-1">一年級</label>
+        <input type="radio" name="iyear" id="iyear-1" hide>
+        
+        <label for="iyear-2">二年級</label>
+        <input type="radio" name="iyear" id="iyear-2" hide>
+
+        <label for="iyear-3">三年級</label>
+        <input type="radio" name="iyear" id="iyear-3" hide>
+
+        <hr>
+
+        <label >教材版本：</label>
+        <label for="ikind-1_Kn">康軒</label>
+        <input type="radio" name="ikind" id="ikind-1_Kn" hide>
+        
+        <label for="ikind-2_Nn">南一</label>
+        <input type="radio" name="ikind" id="ikind-2_Nn" hide>
+
+        <label for="ikind-3_Hn">翰林</label>
+        <input type="radio" name="ikind" id="ikind-3_Hn" hide>
+
+        <hr>
+
+        <label>試卷模式：</label>
+        <label for="imode-LT">例題</label>
+        <input type="radio" name="imode" id="imode-LT" hide>
+
+        <label for="imode-HK">會考</label>
+        <input type="radio" name="imode" id="imode-HK" hide>
+
+        <label for="imode-MN">模擬</label>
+        <input type="radio" name="imode" id="imode-MN" hide>
+
+        <label for="imode-KJ">考卷</label>
+        <input type="radio" name="imode" id="imode-KJ" hide>
+
+        <label for="imode-TC">字串</label>
+        <input type="radio" name="imode" id="imode-TC" hide>
+
+        <div id="qname">
+            <div id="iqname-LT" hidden>
+                <label>難易模式：</label>
+                <label for="ilevel-A">易</label>
+                <input type="radio" name="ilevel" id="ilevel-A" hide>
+
+                <label for="ilevel-B">中</label>
+                <input type="radio" name="ilevel" id="ilevel-B" hide>
+
+                <label for="ilevel-C">難</label>
+                <input type="radio" name="ilevel" id="ilevel-C" hide>
+
+                <br>
+
+                <label>題目總數：</label>
+                <label for="iLTQtotal-5">5題</label>
+                <input type="radio" name="iLTQtotal" id="iLTQtotal-5" hide>
+
+                <label for="iLTQtotal-10">10題</label>
+                <input type="radio" name="iLTQtotal" id="iLTQtotal-10" hide>
+
+                <label for="iLTQtotal-20">20題</label>
+                <input type="radio" name="iLTQtotal" id="iLTQtotal-20" hide>
+
+                <br>
+
+                <label for="LT-ibook">書本名稱：</label>
+                <select name="LT-ibook" id="LT-ibook"></select>
+
+                <br>
+                
+                <label for="LT-ibbok">章節名稱：</label>
+                <select name="LT-ibbok" id="LT-ibbok"></select>
+
+                <br>
+
+                <label for="LT-ibbbk">單元名稱：</label>
+                <select name="LT-ibbbk" id="LT-ibbbk"></select>
+            </div>
+            <div id="iqname-HK" hidden>
+                <label for="HK-ibook">書本名稱：</label>
+                <select name="HK-ibook" id="HK-ibook"></select>
+            </div>
+            <div id="iqname-MN" hidden>
+                <label for="MN-ibook">書本名稱：</label>
+                <select name="MN-ibook" id="MN-ibook"></select>
+            </div>
+            <div id="iqname-KJ" hidden>
+                <label for="KJ-iname">考卷編號：</label>
+                <input type="text" name="KJ-iname" id="KJ-iname">
+                <label for="KJ-iname" id="KJ-iname-check"></label>
+            </div>
+            <div id="iqname-TC" hidden>
+                <label for="TC-iname">自訂字串：</label>
+                <input type="text" name="TC-iname" id="TC-iname" class="iqname">
+            </div>
+        </div>
+
+        <hr>
+
+        <label for="iatotal">答對題數：</label>
+        <input type="number" name="iatotal" id="iatotal" max="10" min="0">
+        <label for="iatotal" id="qtotal" name="qtotal"></label>
+
+        <hr>
+
+        <button id="isend-qname">進入紀錄</button>
+        <button id="isend-writescore">批改紀錄</button>
+        <button id="isend-writeans">離開紀錄</button>
+        <button id="isend-all" disabled>完整紀錄</button>
+
+        <hr>
+
+        <button id="isettingsCmd-input">匯入設定</button>
+        <button id="isettingsCmd-output">匯出設定</button>
+        <button id="isettingsCmd-clear">清空設定</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
