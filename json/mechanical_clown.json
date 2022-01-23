@@ -1,0 +1,28 @@
+{
+    "index": [
+        {
+            "image": "mechanical_clown_default.png", 
+            "text": "default"
+        }, 
+        {
+            "image": "mechanical_clown_default.png", 
+            "text": "歡迎使用kiwiTerminator，我是機械小丑！"
+        }, 
+        {
+            "image": "mechanical_clown_good.png", 
+            "text": "真棒！\n看，我又幫您省了不少時間呢！"
+        }, 
+        {
+            "image": "mechanical_clown_inner.png", 
+            "text": "想看kiwiTerminator的原始碼？\n沒問題，本專案已開源至github！"
+        }, 
+        {
+            "image": "mechanical_clown_send.png", 
+            "text": "使用kiwiTerminator，快速發送作答紀錄！"
+        }, 
+        {
+            "image": "mechanical_clown_default.png", 
+            "text": "還記得2021/01/22那天，是貓虎皮將我以一個個的像素構築而成..."
+        }
+    ]
+}

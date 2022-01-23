@@ -1,3 +1,5 @@
+/* version: 3.0.2*/
+
 @keyframes alertHidden{
     0% {
         opacity: 1;
@@ -9,10 +11,14 @@
     }
 }
 * {
+    user-select: none;
     outline: none;
     font-size: 1.5vw;
     --green: #1eff87;
+    --subGreen: #97ff7d88;
     --red: #ff1e1e;
+    --subRed: #ff7d7d88;
+    --subGray: #80808088;
     -ms-overflow-style: none;
     overflow: -moz-scrollbars-none;
 }
@@ -134,12 +140,12 @@ input:focus {
 }
 [alert-type="done"]:before{
     color: #97ff7d;
-    content: '✔️';
+    content: '[成功] ';
     font-weight: bold;
 }
 [alert-type="error"]:before{
     color: #ff7d7d;
-    content: '❌';
+    content: '[錯誤] ';
     font-weight: bold;
 }
 #toolsDiv {
@@ -218,8 +224,115 @@ button[tool-selected]:not(#TB-close) ~ #toolsMask {
 #TB-score[tool-selected] ~ #toolsMask #TI-score {
     display: block;
 }
+#TB-schedule[tool-selected] ~ #toolsMask #TI-schedule {
+    display: block;
+}
 .boxTitle {
     color: var(--green);
     margin: 3vw 3vw 0vw 3vw;
     font-size: 3vw;
+}
+#moreSettingsRotate {
+    color: white;
+    background: none;
+    border: none;
+    box-shadow: none;
+    transition: 0s;
+}
+#moreSettings ~ #moreSettingsRotate {
+    transform: rotate(90deg);
+}
+#moreSettings:checked ~ #moreSettingsRotate {
+    transform: rotate(180deg);
+}
+#moreSettings ~ #otherSettings {
+    display: none;
+}
+#moreSettings:checked ~ #otherSettings {
+    display: block;
+}
+.scheduleBox {
+    margin: 1vw 0px;
+    padding: 0.5vw;
+    background-color: var(--subGray);
+    border-color: gray;
+    border-style: dashed;
+    border-radius: 1vw;
+    box-sizing: border-box;
+}
+.scheduleBox .title {
+    margin: 0.5vw;
+    text-align: center;
+    font-weight: bold;
+}
+.scheduleBox .loaderO {
+    background-color: gray;
+    border-color: black;
+    border-style: solid;
+    border-width: 0.1vw;
+    border-radius: 100vw;
+    overflow: hidden;
+}
+.scheduleBox .loaderI {
+    width: 0%;
+    padding: 0px 1vw;
+    background-color: white;
+    border-radius: 100vw;
+    text-align: right;
+    box-sizing: border-box;
+    transition: 1s;
+}
+.scheduleBox[schedule-type="done"] {
+    background-color: var(--subGreen);
+    border-color: #8fbc8f;
+}
+.scheduleBox[schedule-type="done"] .loaderO {
+    background-color: #8fbc8f;
+}
+.scheduleBox[schedule-type="done"] .loaderI {
+    background-color: #90ee90;
+}
+.scheduleBox[schedule-type="error"] {
+    background-color: var(--subRed);
+    border-color: #bc8f8f;
+}
+.scheduleBox[schedule-type="error"] .loaderO {
+    background-color: #bc8f8f;
+}
+.scheduleBox[schedule-type="error"] .loaderI {
+    background-color: #ee9090;
+}
+#mechanicalClown {
+    height: 20vw;
+    width: 20vw;
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    z-index: 10000;
+}
+#mechanicalClown-image {
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+}
+#mechanicalClown-text {
+    opacity: 0;
+    margin: 1vw;
+    padding: 0.5vw;
+    height: calc(50% - 2vw);
+    width: calc(100% - 2vw);
+    position: absolute;
+    top: 50%;
+    left: 0px;
+    /* color: #daff9c; */
+    color: white;
+    background-color: #000000d0;
+    font-size: 1vw;
+    border-color: white;
+    border-style: solid;
+    border-width: 0.2vw;
+    border-radius: 0.5vw;
+    overflow-y: auto;
+    /* transition: 1s; */
+    box-sizing: border-box;
 }

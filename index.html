@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta http-equiv="PRAGMA" content="NO-CACHE">
     <meta http-equiv="EXPIRES" content="0">
@@ -9,68 +9,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>kiwiTerminator</title>
+    <link rel="icon" href="image/icon.ico" type="image/x-icon" sizes="128x128">
     <meta name="author" content="MaoHuPi">
     <meta name="description" content="網奇作答紀錄發送工具(適用2021_beta)">
     <meta name="keywords" content="kiwi,plugin,tool">
-    <meta name="version" content="2.0.1">
+    <meta name="version" content="3.0.2">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1 class="boxTitle">kiwiTerminator</h1>
     <div id="alertDiv"></div>
-    <div id="toolsDiv">
-        <div>
-            <button id="TB-history" title="操作紀錄">H</button>
-            <button id="TB-score" title="分數紀錄">S</button>
-            <button id="TB-close" title="發送設定" tool-selected>X</button>
-            <div id="toolsMask">
-                <div id="toolsBox">
-                    <div id="TI-history">
-                        <h1>操作紀錄</h1>
-                        <hr>
-                        <article>
-                            <div pid="pHB" style="overflow: auto; display: grid; grid-gap: 0.5vw; grid-template-columns: auto auto auto auto auto auto;">
-                                <span>編號</span>	
-                                <span>名稱</span>
-                                <span>用戶</span>
-                                <span>類型</span>
-                                <span>時間</span>
-                                <span>結果</span>
-                            </div>
-                        </article>
-                    </div>
-                    <div id="TI-score">
-                        <h1>分數紀錄</h1>
-                        <hr>
-                        <article>
-                            用戶帳號：<span pid="pU"></span><br>
-                            本月積分：數寶 <span pid="m數寶"></span>, 銜接 <span pid="m銜接"></span><br>
-                            學期積分：數寶 <span pid="y數寶"></span>, 銜接 <span pid="y銜接"></span>
-                            <hr>
-                            作答紀錄：<div pid="pGB" style="overflow: auto; display: grid; grid-gap: 0.5vw; grid-template-columns: auto auto auto auto auto auto;">
-                                <span>編號</span>	
-                                <span>名稱</span>
-                                <span>題數</span>
-                                <span>答對</span>
-                                <span>開始</span>
-                                <span>結束</span>
-                            </div>
-                        </article>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div id="box">
         <label for="iurl">網站網址：</label>
         <input type="text" name="iurl" id="iurl">
-        <label for="iurl" id="iurl-check"></label>
+        <label id="iurl-check"></label>
 
         <hr>
 
         <label for="iuser">用戶帳號：</label>
         <input type="text" name="iuser" id="iuser">
-        <label for="iuser" id="iuser-check"></label>
+        <label id="iuser-check"></label>
 
         <hr>
 
@@ -174,22 +132,131 @@
 
         <hr>
 
-        <label for="iatotal">答對題數：</label>
-        <input type="number" name="iatotal" id="iatotal" max="10" min="0">
-        <label for="iatotal" id="qtotal" name="qtotal"></label>
+        <label>答對數值：</label>
+        <label for="iamode-MAX">最大</label>
+        <input type="radio" name="iamode" id="iamode-MAX" hide>
+
+        <label for="iamode-FIX">固定</label>
+        <input type="radio" name="iamode" id="iamode-FIX" hide>
+
+        <label for="iamode-RNG">範圍</label>
+        <input type="radio" name="iamode" id="iamode-RNG" hide>
+
+        <div id="aname">
+            <div id="ianame-MAX" hidden></div>
+            <div id="ianame-FIX" hidden>
+                <label for="iatotal">答對題數：</label>
+                <input type="number" name="iatotal" id="iatotal" max="10" min="0" data-ls="atotal">
+                <label id="qtotal" name="qtotal"></label>
+            </div>
+            <div id="ianame-RNG" hidden>
+                <label for="iatotal-MIN">答對題數：</label>
+                <input type="number" name="iatotal" id="iatotal-MIN" max="10" min="0" data-ls="atotalMIN">
+                <label>~</label>
+                <input type="number" name="iatotal" id="iatotal-MAX" max="10" min="0" data-ls="atotalMAX">
+                <label id="qtotal" name="qtotal"></label>
+            </div>
+        </div>
 
         <hr>
 
+        <label for="moreSettings">更多選項：</label>
+        <input type="checkbox" name="moreSettings" id="moreSettings" hidden>
+        <button id="moreSettingsRotate"><label for="moreSettings">▲</label></button>
+        <label>(完整記錄適用)</label>
+
+        <div id="otherSettings">
+            <label for="os-itimes">發送次數：</label>
+            <input type="number" name="os-itimes" id="os-itimes" min="0" max="100">
+            <label> / 100</label>
+
+            <br>
+
+            <label for="os-iwait1">作答時長：</label>
+            <input type="number" name="os-iwait1" id="os-iwait1" min="0" max="60">
+            <label>~</label>
+            <input type="number" name="os-iwait2" id="os-iwait2" min="0" max="60">
+            <label> 分鐘</label>
+
+            <br>
+
+            <label for="os-igap">發送模式：</label>
+            <label for="os-igap-ON">串發</label>
+            <input type="radio" name="os-igap" id="os-igap-ON" hide>
+
+            <label for="os-igap-OFF">並發</label>
+            <input type="radio" name="os-igap" id="os-igap-OFF" hide>
+        </div>
+
+        <hr>
+        
         <button id="isend-qname">進入紀錄</button>
         <button id="isend-writescore">批改紀錄</button>
         <button id="isend-writeans">離開紀錄</button>
-        <button id="isend-all" disabled>完整紀錄</button>
+        <button id="isend-all" >完整紀錄</button>
 
         <hr>
 
         <button id="isettingsCmd-input">匯入設定</button>
+        <div id="isettingsCmdInputDiv" hidden></div>
         <button id="isettingsCmd-output">匯出設定</button>
+        <div id="isettingsCmdOutputDiv" hidden></div>
         <button id="isettingsCmd-clear">清空設定</button>
+    </div>
+    <div id="toolsDiv">
+        <div>
+            <button id="TB-history" title="操作紀錄">H</button>
+            <button id="TB-score" title="分數紀錄">S</button>
+            <button id="TB-schedule" title="發送進度 (完整記錄適用)">P</button>
+            <button id="TB-close" title="發送設定" tool-selected>X</button>
+            <div id="toolsMask">
+                <div id="toolsBox">
+                    <div id="TI-history">
+                        <h1>操作紀錄</h1>
+                        <hr>
+                        <article>
+                            <div pid="pHB" style="overflow: auto; display: grid; grid-gap: 0.5vw; grid-template-columns: auto auto auto auto auto auto;">
+                                <span>編號</span>	
+                                <span>名稱</span>
+                                <span>用戶</span>
+                                <span>類型</span>
+                                <span>時間</span>
+                                <span>結果</span>
+                            </div>
+                        </article>
+                    </div>
+                    <div id="TI-score">
+                        <h1>分數紀錄</h1>
+                        <hr>
+                        <article>
+                            用戶帳號：<span pid="pU"></span><br>
+                            本月積分：數寶 <span pid="m數寶"></span>, 銜接 <span pid="m銜接"></span><br>
+                            學期積分：數寶 <span pid="y數寶"></span>, 銜接 <span pid="y銜接"></span>
+                            <hr>
+                            作答紀錄：<div pid="pGB" style="overflow: auto; display: grid; grid-gap: 0.5vw; grid-template-columns: auto auto auto auto auto auto;">
+                                <span>編號</span>	
+                                <span>名稱</span>
+                                <span>題數</span>
+                                <span>答對</span>
+                                <span>開始</span>
+                                <span>結束</span>
+                            </div>
+                        </article>
+                    </div>
+                    <div id="TI-schedule">
+                        <h1>發送進度 (完整記錄適用)</h1>
+                        <hr>
+                        <article>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="mechanicalClown">
+        <canvas id="mechanicalClown-image"></canvas>
+        <div id="mechanicalClown-text">
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
